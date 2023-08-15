@@ -1,0 +1,77 @@
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <h1 class="title is-5">Expense Approval System</h1>
+    </a>
+  </div>
+  <div class="navbar-menu is-active">
+    <!-- shown on mobile -->
+    <div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Profile</a>
+        <div class="navbar-dropdown is-right">
+          <a class="navbar-item">Settings</a>
+          <a class="navbar-item">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="columns mt-2 is-mobile is-centered">
+      <div class="column is-full">
+        <ea-expense-modal></ea-expense-modal>
+        <div class="card mt-5">
+          <header class="card-header has-background-primary">
+            <p class="card-header-title has-text-white is-size-6">
+              Expense Title
+            </p>
+            <button class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <dl>
+                <div class="is-flex is-size-7">
+                  <dt class="has-text-weight-bold">Name:</dt>
+                  <dd>XYZ</dd>
+                </div>
+                <div class="is-flex is-size-7">
+                  <dt class="has-text-weight-bold">Status:</dt>
+                  <dd>Draft</dd>
+                </div>
+                <div class="is-flex is-size-7">
+                  <dt class="has-text-weight-bold">Description:</dt>
+                  <dd>Some Description</dd>
+                </div>
+                <div class="is-flex is-size-7">
+                  <dt class="has-text-weight-bold">Category:</dt>
+                  <dd>Food</dd>
+                </div>
+                <div class="is-flex is-size-7">
+                  <dt class="has-text-weight-bold">Expense:</dt>
+                  <dd>100</dd>
+                </div>
+              </dl>
+              <div class="is-flex is-justify-content-flex-end">
+                <button type="button" class="button is-small is-info">
+                  Edit
+                </button>
+                <button type="button" class="button is-small is-danger ml-2">
+                  Delete
+                </button>
+                <button type="button" class="button is-small is-success ml-2">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

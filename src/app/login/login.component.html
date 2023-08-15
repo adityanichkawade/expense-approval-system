@@ -1,0 +1,88 @@
+<div class="container is-fullhd">
+  <div class="columns mt-6 is-mobile is-centered">
+    <div class="column is-half">
+      <h1 class="title is-4 has-text-centered">Expense Approval System</h1>
+      <form
+        (ngSubmit)="loginForm.form.valid && onSubmit()"
+        #loginForm="ngForm"
+        class="box mt-6"
+        novalidate
+      >
+        <h1 class="title is-4">Login</h1>
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="text"
+              placeholder="Username"
+              required
+              minlength="4"
+              maxlength="20"
+              [class.is-danger]="
+                username.invalid &&
+                (username.dirty || username.touched || loginForm.submitted)
+              "
+              name="username"
+              [(ngModel)]="login.username"
+              #username="ngModel"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+          <div
+            *ngIf="
+              username.invalid &&
+              (username.dirty || username.touched || loginForm.submitted)
+            "
+          >
+            <p *ngIf="username.errors?.['required']" class="help is-danger">
+              Username is required
+            </p>
+            <p *ngIf="username.errors?.['minlength']" class="help is-danger">
+              Username should be min 4 characters
+            </p>
+            <p *ngIf="username.errors?.['maxlength']" class="help is-danger">
+              Username should be max 20 characters
+            </p>
+          </div>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              required
+              type="password"
+              [class.is-danger]="
+                password.invalid && (password.dirty || password.touched)
+              "
+              name="password"
+              [(ngModel)]="login.password"
+              #password="ngModel"
+              placeholder="Password"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+          <div
+            *ngIf="
+              password.invalid &&
+              (password.dirty || password.touched || loginForm.submitted)
+            "
+          >
+            <p *ngIf="password.errors?.['required']" class="help is-danger">
+              Password is required
+            </p>
+          </div>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button type="submit" class="button is-success">Login</button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

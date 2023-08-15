@@ -1,0 +1,48 @@
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <form>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Enter Expenses</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label is-small">Name</label>
+          <div class="control">
+            <input class="input is-small" type="text" placeholder="" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-small">Description</label>
+          <div class="control">
+            <textarea class="textarea" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-small">Amount</label>
+          <div class="control">
+            <input class="input is-small" type="number" placeholder="" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-small">Category</label>
+          <div class="control">
+            <div class="select is-small is-fullwidth">
+              <select>
+                <option>Housing</option>
+                <option>Transportation</option>
+                <option>Taxes</option>
+                <option>Food</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Save</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </form>
+  </div>
+</div>
