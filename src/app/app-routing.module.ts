@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ExpenseComponent } from './expense/expense.component';
-import { authGuard } from './shared/auth/auth.guard';
+import { expenseGuard } from './expense/expense.guard';
 
 const routes: Routes = [
   {
@@ -16,8 +16,8 @@ const routes: Routes = [
     component: SignupComponent,
   },
   {
-    path: 'home',
-    canActivate: [authGuard],
+    path: 'expense',
+    canActivate: [expenseGuard],
     component: ExpenseComponent,
   },
 ];

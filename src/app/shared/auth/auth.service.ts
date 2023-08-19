@@ -21,6 +21,13 @@ export class AuthService {
     );
   }
 
+  logout() {
+    return new Observable((subscriber) => {
+      const token = localStorage.removeItem('token');
+      subscriber.next(token);
+    });
+  }
+
   isLoggedIn(): Boolean {
     return localStorage.getItem('token') ? true : false;
   }

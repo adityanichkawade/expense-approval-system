@@ -6,6 +6,8 @@ import {
   EXPENSE_CATEGORIES,
   EXPENSE_STATUS,
 } from './expense.config';
+import { AuthService } from '../shared/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ea-expense',
@@ -15,11 +17,21 @@ export class ExpenseComponent implements OnInit {
   open: boolean = false;
   expenses: Expense[] = [];
 
-  constructor(private expenseService: ExpenseService) {}
+  constructor(
+    private authService: AuthService,
+    private expenseService: ExpenseService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.expenseService.getAll().subscribe((res: any) => {
       this.expenses = res.data;
+    });
+  }
+
+  onLogout() {
+    this.authService.logout().subscribe((token) => {
+      this.router.navigate(['/']);
     });
   }
 
