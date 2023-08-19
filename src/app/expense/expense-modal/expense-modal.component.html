@@ -1,0 +1,111 @@
+<div class="modal" [class.is-active]="open">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Enter Expenses</p>
+        <button
+          type="button"
+          class="delete"
+          aria-label="close"
+          (click)="onClose()"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label is-small">Name</label>
+          <div class="control">
+            <input
+              formControlName="name"
+              class="input is-small"
+              type="text"
+              [class.is-danger]="name.invalid && (name.dirty || name.touched)"
+            />
+          </div>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)">
+            <p *ngIf="name.errors?.['required']" class="help is-danger">
+              Name is required
+            </p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-small">Description</label>
+          <div class="control">
+            <textarea
+              class="textarea is-small"
+              rows="3"
+              formControlName="description"
+              [class.is-danger]="
+                description.invalid &&
+                (description.dirty || description.touched)
+              "
+            ></textarea>
+          </div>
+          <div
+            *ngIf="
+              description.invalid && (description.dirty || description.touched)
+            "
+          >
+            <p *ngIf="description.errors?.['required']" class="help is-danger">
+              Description is required
+            </p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-small">Amount</label>
+          <div class="control">
+            <input
+              class="input is-small"
+              type="number"
+              placeholder=""
+              formControlName="amount"
+              [class.is-danger]="
+                amount.invalid && (amount.dirty || amount.touched)
+              "
+            />
+          </div>
+          <div *ngIf="amount.invalid && (amount.dirty || amount.touched)">
+            <p *ngIf="amount.errors?.['required']" class="help is-danger">
+              Amount is required
+            </p>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-small">Category</label>
+          <div class="control">
+            <div
+              class="select is-small is-fullwidth"
+              [class.is-danger]="
+                category.invalid && (category.dirty || category.touched)
+              "
+            >
+              <select name="category" formControlName="category">
+                <option value="housing">Housing</option>
+                <option value="transportation">Transportation</option>
+                <option value="taxes">Taxes</option>
+                <option value="food">Food</option>
+                <option value="rent">Rent</option>
+                <option value="bill">Bill</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="category.invalid && (category.dirty || category.touched)">
+            <p *ngIf="category.errors?.['required']" class="help is-danger">
+              Category is required
+            </p>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button
+          [disabled]="!expenseForm.valid"
+          type="submit"
+          class="button is-success"
+        >
+          Save
+        </button>
+        <button type="button" class="button" (click)="onClose()">Cancel</button>
+      </footer>
+    </form>
+  </div>
+</div>

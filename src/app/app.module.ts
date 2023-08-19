@@ -6,18 +6,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { GlobaErrorHandler } from './core/error-handler/global.errorhandler';
+import { GlobaErrorHandler } from './shared/error-handler/global.errorhandler';
 
 import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component';
+import { ExpenseComponent } from './expense/expense.component';
 import { LoginComponent } from './login/login.component';
-import { ExpenseModalComponent } from './expense-modal/expense-modal.component';
+import { ExpenseModalComponent } from './expense/expense-modal/expense-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    HomeComponent,
+    ExpenseComponent,
     LoginComponent,
     ExpenseModalComponent,
   ],

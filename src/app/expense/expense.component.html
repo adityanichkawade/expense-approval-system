@@ -21,11 +21,18 @@
   <div class="container">
     <div class="columns mt-2 is-mobile is-centered">
       <div class="column is-full">
-        <ea-expense-modal></ea-expense-modal>
-        <div class="card mt-5">
+        <ea-expense-modal
+          [open]="open"
+          (onSave)="onSave($event)"
+          (onCancel)="onCancel()"
+        ></ea-expense-modal>
+        <button class="button is-info is-small" (click)="onAdd()">
+          Add Expense
+        </button>
+        <div *ngFor="let expense of expenses" class="card mt-5">
           <header class="card-header has-background-primary">
             <p class="card-header-title has-text-white is-size-6">
-              Expense Title
+              {{ expense.name }}
             </p>
             <button class="card-header-icon" aria-label="more options">
               <span class="icon">
@@ -38,33 +45,45 @@
               <dl>
                 <div class="is-flex is-size-7">
                   <dt class="has-text-weight-bold">Name:</dt>
-                  <dd>XYZ</dd>
+                  <dd>{{ expense.name }}</dd>
                 </div>
                 <div class="is-flex is-size-7">
                   <dt class="has-text-weight-bold">Status:</dt>
-                  <dd>Draft</dd>
+                  <dd>{{ getStatus(expense.status) }}</dd>
                 </div>
                 <div class="is-flex is-size-7">
                   <dt class="has-text-weight-bold">Description:</dt>
-                  <dd>Some Description</dd>
+                  <dd>{{ expense.description }}</dd>
                 </div>
                 <div class="is-flex is-size-7">
                   <dt class="has-text-weight-bold">Category:</dt>
-                  <dd>Food</dd>
+                  <dd>{{ getCategory(expense.category) }}</dd>
                 </div>
                 <div class="is-flex is-size-7">
                   <dt class="has-text-weight-bold">Expense:</dt>
-                  <dd>100</dd>
+                  <dd>{{ expense.amount }}</dd>
                 </div>
               </dl>
               <div class="is-flex is-justify-content-flex-end">
-                <button type="button" class="button is-small is-info">
+                <button
+                  *ngIf="canShowButton(expense.status, 'edit')"
+                  type="button"
+                  class="button is-small is-info"
+                >
                   Edit
                 </button>
-                <button type="button" class="button is-small is-danger ml-2">
+                <button
+                  *ngIf="canShowButton(expense.status, 'delete')"
+                  type="button"
+                  class="button is-small is-danger ml-2"
+                >
                   Delete
                 </button>
-                <button type="button" class="button is-small is-success ml-2">
+                <button
+                  *ngIf="canShowButton(expense.status, 'submit')"
+                  type="button"
+                  class="button is-small is-success ml-2"
+                >
                   Submit
                 </button>
               </div>

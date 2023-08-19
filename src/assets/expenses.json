@@ -1,0 +1,30 @@
+{
+  "status": "success",
+  "statusCode": 200,
+  "data": [
+    {
+      "id": 1,
+      "name": "Rent",
+      "description": "Monthly Rent",
+      "category": "rent",
+      "amount": 5000,
+      "status": "draft"
+    },
+    {
+      "id": 2,
+      "name": "Electricity Bill",
+      "description": "Monthly Electricity Rent",
+      "category": "bill",
+      "amount": 900,
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "name": "Grocery",
+      "description": "Monthly Grocery",
+      "category": "bill",
+      "amount": 900,
+      "status": "approved"
+    }
+  ]
+}
