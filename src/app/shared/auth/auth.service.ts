@@ -4,7 +4,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ILogin } from './auth.model';
+import { Auth } from './auth.model';
 import { API_ENDPOINTS } from './auth.config';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
@@ -13,9 +13,9 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.get<ILogin>(API_ENDPOINTS.login.url).pipe(
+    return this.http.get<Auth>(API_ENDPOINTS.login.url).pipe(
       catchError(this.handleError),
-      tap((res: ILogin) => {
+      tap((res: Auth) => {
         localStorage.setItem('token', res.data.token);
       })
     );
