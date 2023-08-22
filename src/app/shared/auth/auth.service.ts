@@ -4,35 +4,54 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Auth } from './auth.model';
+import { Auth, AuthUser } from './auth.model';
 import { API_ENDPOINTS } from './auth.config';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private user!: AuthUser;
+
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.get<Auth>(API_ENDPOINTS.login.url).pipe(
-      catchError(this.handleError),
-      tap((res: Auth) => {
-        localStorage.setItem('token', res.data.token);
+    return this.http
+      .post<Auth>(API_ENDPOINTS.login.url, {
+        username,
+        password,
       })
-    );
+      .pipe(
+        tap((res: Auth) => {
+          localStorage.setItem('user', JSON.stringify(res.data));
+        })
+      );
   }
 
   logout() {
     return new Observable((subscriber) => {
-      const token = localStorage.removeItem('token');
-      subscriber.next(token);
+      const user = localStorage.removeItem('user');
+      subscriber.next(user);
     });
   }
 
-  isLoggedIn(): Boolean {
-    return localStorage.getItem('token') ? true : false;
+  getUserProfile() {
+    if (!this.user) {
+      const user = localStorage.getItem('user') || '';
+      if (user) {
+        const data = JSON.parse(user);
+        this.user = data;
+      }
+    }
+    return this.user;
   }
 
-  handleError(error: any) {
-    return throwError(() => error);
+  isLoggedIn(): Boolean {
+    const user = this.getUserProfile();
+    return this.user.token ? true : false;
+  }
+
+  getAuthorizationToken() {
+    const user = this.getUserProfile();
+    return this.user ? this.user.token : '';
   }
 }

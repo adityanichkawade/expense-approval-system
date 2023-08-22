@@ -5,3 +5,8 @@ export interface Auth {
     token: string;
   };
 }
+
+export interface AuthUser {
+  username: string;
+  token: string;
+}

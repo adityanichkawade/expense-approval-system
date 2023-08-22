@@ -1,50 +1,131 @@
 <div class="container is-fullhd">
   <div class="columns mt-1 is-mobile is-centered">
     <div class="column is-half">
-      <form class="box">
+      <form class="box" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <h1 class="title is-4">Sign Up</h1>
         <div class="field">
           <label class="label">Firstname</label>
           <div class="control">
-            <input name="username" class="input" placeholder="" />
+            <input
+              formControlName="firstname"
+              name="username"
+              class="input"
+              placeholder=""
+              [class.is-danger]="
+                firstname.invalid && (firstname.dirty || firstname.touched)
+              "
+            />
+          </div>
+          <div
+            *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)"
+          >
+            <p *ngIf="firstname.errors?.['required']" class="help is-danger">
+              Role is required
+            </p>
           </div>
         </div>
         <div class="field">
           <label class="label">Lastname</label>
           <div class="control">
-            <input class="input" type="text" placeholder="" />
+            <input
+              class="input"
+              formControlName="lastname"
+              type="text"
+              placeholder=""
+              [class.is-danger]="
+                lastname.invalid && (lastname.dirty || lastname.touched)
+              "
+            />
+          </div>
+          <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+            <p *ngIf="lastname.errors?.['required']" class="help is-danger">
+              Lastname is required
+            </p>
           </div>
         </div>
         <div class="field">
           <label class="label">Username</label>
           <div class="control">
-            <input class="input" type="text" placeholder="eg. abc123" />
+            <input
+              formControlName="username"
+              class="input"
+              type="text"
+              placeholder="eg. abc123"
+              [class.is-danger]="
+                username.invalid && (username.dirty || username.touched)
+              "
+            />
+          </div>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)">
+            <p *ngIf="username.errors?.['required']" class="help is-danger">
+              Username is required
+            </p>
           </div>
         </div>
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input class="input" type="password" placeholder="********" />
+            <input
+              formControlName="password"
+              class="input"
+              type="password"
+              placeholder="********"
+              [class.is-danger]="
+                password.invalid && (password.dirty || password.touched)
+              "
+            />
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <p *ngIf="password.errors?.['required']" class="help is-danger">
+              Password is required
+            </p>
           </div>
         </div>
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input class="input" type="email" placeholder="eg. abc@xyz.com" />
+            <input
+              formControlName="email"
+              class="input"
+              type="email"
+              placeholder="eg. abc@xyz.com"
+              [class.is-danger]="
+                email.invalid && (email.dirty || email.touched)
+              "
+            />
+          </div>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <p *ngIf="email.errors?.['required']" class="help is-danger">
+              Email is required
+            </p>
           </div>
         </div>
         <div class="field">
           <label class="label">Role</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
-                <option>User</option>
-                <option>Manager</option>
+              <select
+                [class.is-danger]="role.invalid && (role.dirty || role.touched)"
+                formControlName="role"
+              >
+                <option value="user">User</option>
+                <option value="manager">Manager</option>
               </select>
             </div>
           </div>
+          <div *ngIf="role.invalid && (role.dirty || role.touched)">
+            <p *ngIf="role.errors?.['required']" class="help is-danger">
+              Role is required
+            </p>
+          </div>
         </div>
-        <button type="submit" class="button is-primary">Sign Up</button>
+        <button
+          type="submit"
+          [disabled]="!signupForm.valid"
+          class="button is-primary"
+        >
+          Sign Up
+        </button>
       </form>
     </div>
   </div>

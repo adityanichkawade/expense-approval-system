@@ -6,12 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { GlobaErrorHandler } from './shared/error-handler/global.errorhandler';
+import { AppErrorHandler } from './app.errorhandler';
 
 import { SignupComponent } from './signup/signup.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { LoginComponent } from './login/login.component';
 import { ExpenseModalComponent } from './expense/expense-modal/expense-modal.component';
+import { httpInterceptorProviders } from './app-interceptor.provider';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { ExpenseModalComponent } from './expense/expense-modal/expense-modal.com
     AppRoutingModule,
   ],
   providers: [
+    httpInterceptorProviders,
     {
       provide: ErrorHandler,
-      useClass: GlobaErrorHandler,
+      useClass: AppErrorHandler,
     },
   ],
   bootstrap: [AppComponent],
