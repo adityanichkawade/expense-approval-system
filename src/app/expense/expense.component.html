@@ -22,7 +22,8 @@
     <div class="columns mt-2 is-mobile is-centered">
       <div class="column is-full">
         <ea-expense-modal
-          [open]="open"
+          *ngIf="open"
+          [expense]="currentExpense"
           (onSave)="onSave($event)"
           (onCancel)="onCancel()"
         ></ea-expense-modal>
@@ -69,6 +70,7 @@
                   *ngIf="canShowButton(expense.status, 'edit')"
                   type="button"
                   class="button is-small is-info"
+                  (click)="onEdit(expense.expenseid)"
                 >
                   Edit
                 </button>
@@ -83,6 +85,7 @@
                   *ngIf="canShowButton(expense.status, 'submit')"
                   type="button"
                   class="button is-small is-success ml-2"
+                  (click)="onSubmit(expense.expenseid)"
                 >
                   Submit
                 </button>

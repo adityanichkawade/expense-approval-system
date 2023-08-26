@@ -10,8 +10,6 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private user!: AuthUser;
-
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
@@ -22,36 +20,24 @@ export class AuthService {
       })
       .pipe(
         tap((res: Auth) => {
-          localStorage.setItem('user', JSON.stringify(res.data));
+          localStorage.setItem('token', res.data.token);
         })
       );
   }
 
   logout() {
     return new Observable((subscriber) => {
-      const user = localStorage.removeItem('user');
-      subscriber.next(user);
+      const token = localStorage.removeItem('token');
+      subscriber.next(token);
     });
   }
 
-  getUserProfile() {
-    if (!this.user) {
-      const user = localStorage.getItem('user') || '';
-      if (user) {
-        const data = JSON.parse(user);
-        this.user = data;
-      }
-    }
-    return this.user;
-  }
-
   isLoggedIn(): Boolean {
-    const user = this.getUserProfile();
-    return this.user.token ? true : false;
+    const token = this.getAuthorizationToken();
+    return token ? true : false;
   }
 
   getAuthorizationToken() {
-    const user = this.getUserProfile();
-    return this.user ? this.user.token : '';
+    return localStorage.getItem('token');
   }
 }

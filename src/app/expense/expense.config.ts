@@ -1,7 +1,15 @@
+import { environment } from 'src/environments/environment';
+
 export const EXPENSE_API_ENDPOINTS = {
-  expenses: {
+  users: {
     get: {
-      url: '/assets/expenses.json',
+      url: `${environment.apiUrl}/api/users/expenses`,
+    },
+    post: {
+      url: `${environment.apiUrl}/api/users/expenses`,
+    },
+    put: {
+      url: `${environment.apiUrl}/api/users/expenses`,
     },
   },
 };

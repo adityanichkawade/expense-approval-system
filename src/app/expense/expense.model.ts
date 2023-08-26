@@ -1,10 +1,11 @@
 export class Expense {
   constructor(
-    public id: number = -1,
-    public name: string,
-    public amount: number,
-    public category: string,
-    public status: string,
-    public description: string
+    public expenseid: number = -1,
+    public name: string = '',
+    public amount: number = -1,
+    public category: string = '',
+    public description: string = '',
+    public createdBy: string = '',
+    public status: string = ''
   ) {}
 }

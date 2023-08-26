@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class ExpenseComponent implements OnInit {
   open: boolean = false;
   expenses: Expense[] = [];
+  currentExpense: Expense | undefined;
 
   constructor(
     private authService: AuthService,
@@ -24,7 +25,11 @@ export class ExpenseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.expenseService.getAll().subscribe((res: any) => {
+    this.fetchExpenses();
+  }
+
+  fetchExpenses() {
+    this.expenseService.getAllByUser().subscribe((res: any) => {
       this.expenses = res.data;
     });
   }
@@ -47,19 +52,45 @@ export class ExpenseComponent implements OnInit {
     return EXPENSE_ACTIONS[status].includes(action);
   }
 
-  onAdd() {
+  openModal() {
     this.open = true;
   }
 
-  close() {
+  closeModal() {
     this.open = false;
   }
 
+  onAdd() {
+    this.openModal();
+  }
+
+  onEdit(id: number) {
+    const expense = this.expenses.find((expense) => expense.expenseid === id);
+    this.currentExpense = expense;
+    this.openModal();
+  }
+
+  onSubmit(id: number) {
+    this.expenseService.submit(id).subscribe((res) => {
+      this.fetchExpenses();
+    });
+  }
+
   onSave(expense: Expense) {
-    this.close();
+    if (expense.expenseid !== -1) {
+      this.expenseService.update(expense).subscribe((res) => {
+        this.closeModal();
+        this.fetchExpenses();
+      });
+    } else {
+      this.expenseService.create(expense).subscribe((res) => {
+        this.closeModal();
+        this.fetchExpenses();
+      });
+    }
   }
 
   onCancel() {
-    this.close();
+    this.closeModal();
   }
 }
